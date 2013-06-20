@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="Oceans/Indicator/Indicator.css">
+<link rel="stylesheet" href="Oceans/ScrollField/ScrollField.css">
+<script src="jQuery/jquery.js"></script>
+<script src="jQuery/jquery.easing.min.js"></script>
+<script src="Oceans/Oceans.js"></script>
+<script src="Oceans/EventInterface/EventInterface.js"></script>
+<script src="Oceans/CustomElement/CustomElement.js"></script>
+<script src="Oceans/Indicator/Indicator.js"></script>
+<script src="Oceans/ScrollField/ScrollField.js"></script>
+<script>
+'use strict';
+jQuery(function ($) {
+	var vertical = new Oceans.Indicator({ direction: 'vertical', min : 0, max : 100 });
+	vertical.appendTo($('.field'));
+	vertical.on('change', function(e){
+		horizontal.setMin(vertical.getMin());
+		horizontal.setMax(vertical.getMax());
+		horizontal.setValue(vertical.getValue());
+	});
+
+	var horizontal = new Oceans.Indicator({ direction: 'horizontal', min : 0, max : 100 });
+	horizontal.appendTo($('.field'));
+
+	$('input').on('change', function(e){
+		var $node = $(e.currentTarget);
+		var value = parseInt($node.val(), 10) || 0;
+		switch ($node.attr('name')) {
+			case 'min' :
+				vertical.setMin(value);
+			break;
+			case 'max' :
+				vertical.setMax(value);
+			break;
+			case 'value' :
+				vertical.setValue(value);
+			break;
+		}
+		$('[name="min"]').val(vertical.getMin());
+		$('[name="max"]').val(vertical.getMax());
+		$('[name="value"]').val(vertical.getValue());
+	});
+});
+</script>
+<style>
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background: #fff;
+}
+.field {
+	position: relative;
+	width: 400px;
+	height: 400px;
+}
+.oceans-indicator {
+	background: #999;
+}
+.oceans-indicator .bar {
+	background: #666;
+	color: #fff;
+}
+.oceans-indicator[data-direction="vertical"] {
+	height: auto;
+	bottom: 20px;
+}
+.oceans-indicator[data-direction="horizontal"] {
+	width: auto;
+	right: 20px;
+}
+</style>
+</head>
+<body>
+
+<dl>
+<dt>min</dt>
+<dd><input type="number" name="min" value="0"></dd>
+<dt>max</dt>
+<dd><input type="number" name="max" value="100"></dd>
+<dt>value</dt>
+<dd><input type="number" name="value" value="0"></dd>
+</dl>
+
+<div class="field"></div>
+
+</body>
+</html>
