@@ -311,12 +311,13 @@ Oceans.Indicator.prototype.onDragEnd = function (e) {
 		e.preventDefault();
 		this.isDrag = false;
 		this.from   = 0;
-		Oceans.$document
-			.off(this.Event.MOUSEMOVE, Oceans.$.proxy(this.onDragMove, this))
-			.off(this.Event.MOUSEUP,   Oceans.$.proxy(this.onDragEnd,  this))
-			.off(this.Event.TOUCHMOVE, Oceans.$.proxy(this.onDragMove, this))
-			.off(this.Event.TOUCHEND,  Oceans.$.proxy(this.onDragEnd,  this));
 	}
+
+	Oceans.$document
+		.off(this.Event.MOUSEMOVE, Oceans.$.proxy(this.onDragMove, this))
+		.off(this.Event.MOUSEUP,   Oceans.$.proxy(this.onDragEnd,  this))
+		.off(this.Event.TOUCHMOVE, Oceans.$.proxy(this.onDragMove, this))
+		.off(this.Event.TOUCHEND,  Oceans.$.proxy(this.onDragEnd,  this));
 };
 
 Oceans.Indicator.Option = function (option) {

@@ -223,8 +223,9 @@ Oceans.ScrollField.prototype.onSwipeEnd = function (e) {
 				}, this)
 			});
 		}
-		Oceans.$document
-			.off(this.Event.TOUCHMOVE, Oceans.$.proxy(this.onSwipeMove, this))
-			.off(this.Event.TOUCHEND,  Oceans.$.proxy(this.onSwipeEnd,  this));
 	}
+
+	Oceans.$document
+		.off(this.Event.TOUCHMOVE, Oceans.$.proxy(this.onSwipeMove, this))
+		.off(this.Event.TOUCHEND,  Oceans.$.proxy(this.onSwipeEnd,  this));
 };
