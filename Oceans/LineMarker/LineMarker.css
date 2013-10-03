@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.oceans-linemarker {
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+.oceans-linemarker mark {
+	background: #ff0;
+	color: #000;
+	letter-spacing: -0.1px;
+}
+.oceans-linemarker .char {
+	position: relative;
+}
+.oceans-linemarker .space {
+	font-size: 0;
+	width: 0;
+	visibility: hidden;
+}
+.line {
+	background: #ff0 url(img/linemarker_mask_01.png) 0 50% repeat-y;
+	color: #000;
+}
+.browser-webkit .line:after {
+	content: ".";
+	font-size: 0;
+	line-height: 0;
+	width: 0;
+}
+.line.start {
+	margin-left: -5px;
+	padding-left: 5px;
+}
+.line.end {
+	margin-right: -5px;
+	padding-right: 5px;
+}

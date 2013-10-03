@@ -10,6 +10,7 @@ var Oceans = {
 	isLoaded         : false,
 	scrollOffset     : { x : 0, y : -20 },
 	duration         : 400,
+	interval         : 1000 / 60,
 	easing           : 'swing'
 };
 

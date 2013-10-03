@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Oceans.LineMarker</title>
+<link rel="stylesheet" href="Oceans/LineMarker/LineMarker.css">
+<script src="jQuery/jquery.js"></script>
+<script src="jQuery/jquery.easing.min.js"></script>
+<script src="Oceans/Oceans.js"></script>
+<script src="Oceans/EventInterface/EventInterface.js"></script>
+<script src="Oceans/CustomElement/CustomElement.js"></script>
+<script src="Oceans/LineMarker/LineMarker.js"></script>
+<script>
+jQuery(function($){
+	if (Oceans.browser.isWebkit) {
+		$('body').addClass('browser-webkit');
+	}
+
+	var markers = [];
+	var cursor  = 0;
+	function onComplete(){
+		cursor++;
+		if (markers[cursor]) {
+			markers[cursor].start();
+		}
+	};
+	$('.oceans-linemarker')
+	.each(function(index, node){
+		var marker = new Oceans.LineMarker(node);
+		marker.on('complete', onComplete);
+		markers.push(marker);
+	});
+	markers[0].start();
+});
+</script>
+<style>
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background: #fff;
+	font-size: 14px;
+	line-height: 30px;
+	font-family: Meiryo, sans-serif;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+.oceans-linemarker {
+	margin: 0 0 10px;
+	width: 200px;
+	padding: 10px;
+	background: #000;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div class="oceans-linemarker">
+<p><mark>これはマーキング、、、そしてあいうえおかきくあいうえおかきくあいうえおかきくあいうえおかきくされたテキスト</mark></p>
+<p><mark>これは</mark>マーキング、、、そしてあいうえおかきくあいうえおかきくあいうえおかきくあいうえおかきくされたテキスト</p>
+<p>あああ<mark>これはこれはこれはこれはこれは</mark>あああ</p>
+<p>これはマーキング、、、そしてあいうえおかきくあいうえおかきくあいうえおかきくあいうえおかきく<mark>されたテキスト</mark></p>
+<p><mark>これは</mark>あああ</p>
+<p>あああ<mark>これは</mark></p>
+<p>あああ<mark>これは</mark>あああ</p>
+</div>
+
+</body>
+</html>
