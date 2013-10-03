@@ -1,0 +1,17 @@
+.oceans-accordion {
+}
+.oceans-accordion .toggle {
+	cursor: pointer;
+}
+.oceans-accordion .body {
+	position: relative;
+	overflow: hidden;
+	height: 0;
+}
+
+.oceans-accordion.opened {
+}
+.oceans-accordion.opened .toggle {
+}
+.oceans-accordion.opened .body {
+}
