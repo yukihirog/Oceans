@@ -50,12 +50,14 @@ Oceans.Accordion.prototype.open = function () {
 		this.$node.addClass(this.openedClass);
 		var height = this.getBodyHeight();
 		this.$body.stop().animate({ height : height }, Oceans.duration, Oceans.easing, $.proxy(this.onOpen, this));
+		this.trigger('beforeopen');
 	}
 };
 Oceans.Accordion.prototype.close = function () {
 	if (this.isOpened()) {
 		this.$node.removeClass(this.openedClass);
 		this.$body.stop().animate({ height : 0 }, Oceans.duration, Oceans.easing, $.proxy(this.onClose, this));
+		this.trigger('beforeclose');
 	}
 };
 Oceans.Accordion.prototype.toggle = function () {
