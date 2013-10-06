@@ -5,7 +5,6 @@ var Oceans = Oceans || {};
 Oceans.FadeGroup = function (node) {
 	this.$node      = null;
 	this.$items     = null;
-	this.$lines     = null;
 	this.timer      = 0;
 	this.startAt    = 0;
 	this.easing     = $.easing.easeInOutQuad;
@@ -38,8 +37,13 @@ Oceans.FadeGroup.prototype.getCurrentRatio = function () {
 	return Math.min(1, Math.max(0, this.easing(null, this.getCurrentTime(), 0, 1, this.duration, 1.70158)));
 };
 Oceans.FadeGroup.prototype.start = function () {
-	this.startAt = this.getNow();
-	this.setTimer();
+	if (this.$items.length) {
+		this.startAt = this.getNow();
+		this.setTimer();
+	} else {
+		this.stop();
+		this.onComplete();
+	}
 };
 Oceans.FadeGroup.prototype.stop = function () {
 	this.clearTimer();

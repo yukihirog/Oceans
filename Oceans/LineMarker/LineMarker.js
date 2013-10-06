@@ -117,9 +117,14 @@ Oceans.LineMarker.prototype.getCurrentRatio = function () {
 	return Math.min(1, Math.max(0, this.easing(null, this.getCurrentTime(), 0, 1, this.duration, 1.70158)));
 };
 Oceans.LineMarker.prototype.start = function () {
-	this.duration = this.timeAtChar * this.$chars.length
-	this.startAt = this.getNow();
-	this.setTimer();
+	if (this.$lines.length) {
+		this.duration = this.timeAtChar * this.$chars.length
+		this.startAt = this.getNow();
+		this.setTimer();
+	} else {
+		this.stop();
+		this.onComplete();
+	}
 };
 Oceans.LineMarker.prototype.stop = function () {
 	this.clearTimer();
