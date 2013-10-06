@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Oceans.LineMarker</title>
+<link rel="stylesheet" href="Oceans/LineMarker/LineMarker.css">
+<script src="jQuery/jquery.js"></script>
+<script src="jQuery/jquery.easing.min.js"></script>
+<script src="Oceans/Oceans.js"></script>
+<script src="Oceans/EventInterface/EventInterface.js"></script>
+<script src="Oceans/CustomElement/CustomElement.js"></script>
+<script src="Oceans/FadeGroup/FadeGroup.js"></script>
+<script>
+jQuery(function($){
+	$('.oceans-fadegroup')
+	.each(function(index, node){
+		var fader = new Oceans.FadeGroup(node);
+		fader.start();
+	});
+});
+</script>
+<style>
+.oceans-fadegroup-item {
+	background: #000;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div class="oceans-fadegroup">
+<p class="oceans-fadegroup-item">1</p>
+<p class="oceans-fadegroup-item">2</p>
+<p class="oceans-fadegroup-item">3</p>
+<p class="oceans-fadegroup-item">4</p>
+<p class="oceans-fadegroup-item">5</p>
+</div>
+
+</body>
+</html>
