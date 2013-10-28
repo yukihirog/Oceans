@@ -8,7 +8,7 @@ var Oceans = {
 	browser          : {},
 	transparentImage : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=',
 	isLoaded         : false,
-	scrollOffset     : { x : 0, y : -20 },
+	scrollOffset     : { x : 0, y : -60 },
 	duration         : 400,
 	interval         : 1000 / 60,
 	easing           : 'swing'
@@ -16,8 +16,12 @@ var Oceans = {
 
 (function(browser){
 	var ua = navigator.userAgent;
+	browser.isWindows    = ua.indexOf('Windows') !== -1;
+	browser.isMac        = ua.indexOf('Mac')     !== -1;
 	browser.isIE         = ua.indexOf('MSIE')    !== -1;
 	browser.isWebkit     = ua.indexOf('WebKit')  !== -1;
+	browser.isSafari     = ua.indexOf('Apple')   !== -1 && ua.indexOf('Chrome') === -1;
+	browser.isFirefox    = ua.indexOf('Firefox') !== -1;
 	browser.isAndroid    = ua.indexOf('Android') !== -1;
 	browser.isIOS        = !!ua.match(/iPhone|iPad|iPod/);
 	browser.isSmartphone = browser.isAndroid || browser.isIOS;
@@ -66,7 +70,7 @@ Oceans.fixSmartphone = function () {
 	}
 };
 
-jQuery(function($){
+Oceans.$(function($){
 	Oceans.isLoaded = true;
 	Oceans.$scroll = Oceans.browser.isWebkit ? Oceans.$document.find('body').eq(0) : $(Oceans.$document.get(0).documentElement);
 });
