@@ -7,8 +7,6 @@ Oceans.CheckboxElement = function (node) {
 };
 Oceans.CheckboxElement.prototype = new Oceans.CustomElement();
 Oceans.CheckboxElement.prototype.init = function (node) {
-	console.log(node);
-
 	this.$field = $(node);
 
 	var $label = this.$field.parents('label');
