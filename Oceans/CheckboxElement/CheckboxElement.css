@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.oceans-checkbox-element {
+	zoom: 1;
+}
+.oceans-checkbox-element:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.oceans-checkbox-element input[type="checkbox"] {
+	position: absolute;
+	visibility: hidden;
+}
+.oceans-checkbox-element .check-mark {
+	float: left;
+	display: block;
+	width: 10px;
+	height: 10px;
+	background: black;
+}
+.oceans-checkbox-element.checked .check-mark {
+	background: green;
+}
+.oceans-checkbox-element .label {
+	float: left;
+}
