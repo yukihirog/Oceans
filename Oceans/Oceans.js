@@ -8,7 +8,7 @@ var Oceans = {
 	browser          : {},
 	transparentImage : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=',
 	isLoaded         : false,
-	scrollOffset     : { x : 0, y : -60 },
+	scrollOffset     : { x : 0, y : -58 },
 	duration         : 400,
 	interval         : 1000 / 60,
 	easing           : 'swing'
@@ -16,15 +16,19 @@ var Oceans = {
 
 (function(browser){
 	var ua = navigator.userAgent;
-	browser.isWindows    = ua.indexOf('Windows') !== -1;
-	browser.isMac        = ua.indexOf('Mac')     !== -1;
-	browser.isIE         = ua.indexOf('MSIE')    !== -1;
-	browser.isWebkit     = ua.indexOf('WebKit')  !== -1;
-	browser.isSafari     = ua.indexOf('Apple')   !== -1 && ua.indexOf('Chrome') === -1;
-	browser.isFirefox    = ua.indexOf('Firefox') !== -1;
-	browser.isAndroid    = ua.indexOf('Android') !== -1;
-	browser.isIOS        = !!ua.match(/iPhone|iPad|iPod/);
-	browser.isSmartphone = browser.isAndroid || browser.isIOS;
+	browser.isWindows      = ua.indexOf('Windows') !== -1;
+	browser.isMac          = ua.indexOf('Mac')     !== -1;
+	browser.isIE           = ua.indexOf('MSIE')    !== -1;
+	browser.isWebkit       = ua.indexOf('WebKit')  !== -1;
+	browser.isSafari       = ua.indexOf('Apple')   !== -1 && ua.indexOf('Chrome') === -1;
+	browser.isFirefox      = ua.indexOf('Firefox') !== -1;
+	browser.isAndroid      = ua.indexOf('Android') !== -1;
+	browser.isIOS          = !!ua.match(/iPhone|iPad|iPod/);
+	browser.isWindowsPhone = !!ua.match(/Windows\s*Phone/);
+	browser.isBlackBerry   = !!ua.match(/BlackBerry/);
+	browser.isSmartDevice  = browser.isAndroid || browser.isIOS || browser.isWindowsPhone || browser.isBlackBerry;
+	browser.isTablet       = browser.isSmartDevice && ((browser.isIOS && !!ua.match(/iPad/)) || (browser.isAndroid && (ua.match(/SC\-01C/) || !ua.match(/Mobile/))));
+	browser.isSmartphone   = browser.isSmartDevice && !browser.isTablet;
 })(Oceans.browser);
 
 Oceans.scrollTo = function (x, y, isAnimate) {
@@ -65,7 +69,7 @@ Oceans.fixSmartphone = function () {
 	if (this.browser.isAndroid) {
 		this.fixAndroid();
 	}
-	if (this.browser.isSmartphone) {
+	if (this.browser.isSmartDevice) {
 		this.hideLocationBar();
 	}
 };
