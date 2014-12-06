@@ -18,7 +18,7 @@ var Oceans = {
 	var ua = navigator.userAgent;
 	browser.isWindows      = ua.indexOf('Windows') !== -1;
 	browser.isMac          = ua.indexOf('Mac')     !== -1;
-	browser.isIE           = ua.indexOf('MSIE')    !== -1;
+	browser.isIE           = ua.indexOf('MSIE')    !== -1 || ua.indexOf('Trident/') !== -1;
 	browser.isWebkit       = ua.indexOf('WebKit')  !== -1;
 	browser.isSafari       = ua.indexOf('Apple')   !== -1 && ua.indexOf('Chrome') === -1;
 	browser.isFirefox      = ua.indexOf('Firefox') !== -1;
@@ -29,6 +29,7 @@ var Oceans = {
 	browser.isSmartDevice  = browser.isAndroid || browser.isIOS || browser.isWindowsPhone || browser.isBlackBerry;
 	browser.isTablet       = browser.isSmartDevice && ((browser.isIOS && !!ua.match(/iPad/)) || (browser.isAndroid && (ua.match(/SC\-01C/) || !ua.match(/Mobile/))));
 	browser.isSmartphone   = browser.isSmartDevice && !browser.isTablet;
+	browser.version        = parseFloat((ua.match(/(rv:|MSIE\s+|OS\s+|Android\s+)(\d+([._]\d+)?)/) || [0, 0, 0])[2], 10);
 })(Oceans.browser);
 
 Oceans.scrollTo = function (x, y, isAnimate) {
