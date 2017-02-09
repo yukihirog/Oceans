@@ -13,15 +13,21 @@ Oceans.CustomElement.prototype.getNode = function () {
 	return this.$node;
 };
 Oceans.CustomElement.prototype.setNode = function (node) {
-	this.$node = $(node).eq(0);
+	if (node) {
+		this.$node = $(node).eq(0);
+	}
 };
 Oceans.CustomElement.prototype.setEvent = function () {
 };
 Oceans.CustomElement.prototype.append = function (node) {
-	this.$node.append(node);
+	if (node) {
+		this.$node.append(node);
+	}
 	return this;
 };
 Oceans.CustomElement.prototype.appendTo = function (node) {
-	this.$node.appendTo(node);
+	if (node) {
+		this.$node.appendTo(node);
+	}
 	return this;
 };
