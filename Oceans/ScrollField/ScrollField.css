@@ -1,8 +1,0 @@
-.oceans-scrollfield {
-	position: relative;
-	padding-right: 20px;
-}
-.oceans-scrollfield .body {
-	position: relative;
-	overflow: auto;
-}
