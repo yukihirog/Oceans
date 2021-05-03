@@ -1,0 +1,1 @@
+{"version":3,"sources":["Oceans/index.js"],"names":["Oceans","version"],"mappings":"aAEA,IAAMA,OAAS,CACbC,QAAS","file":"Oceans.js","sourcesContent":["'use strict';\n\nconst Oceans = {\n  version: '2.0.0'\n};\n"]}

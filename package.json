@@ -1,0 +1,33 @@
+{
+  "name": "oceans.js",
+  "version": "2.0.0",
+  "description": "JavaScript Library for common Websites.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yukihirog/Oceans.git"
+  },
+  "author": "yukihirog",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yukihirog/Oceans/issues"
+  },
+  "homepage": "https://github.com/yukihirog/Oceans#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.0",
+    "browser-sync": "^2.26.14",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-changed": "^3.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}
