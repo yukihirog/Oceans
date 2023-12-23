@@ -1,0 +1,16 @@
+{
+  // サイト名
+  "sitename": "Website",
+
+  // サイト名
+  "description": "Description",
+
+  // サイトURL
+  "url": "https://yukihirog.jp/",
+
+  // og:type
+  "ogtype": "article",
+
+  // Google Tag ManagerのID
+  "gtmid": "UA-XXXX"
+}

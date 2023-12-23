@@ -1,0 +1,40 @@
+{
+  "name": "oceans",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "release": "NODE_ENV=production; dotenv -c $NODE_ENV -- npm run build;",
+    "staging": "NODE_ENV=staging; dotenv -c $NODE_ENV -- npm run build;",
+    "dev": "NODE_ENV=development; dotenv -c $NODE_ENV -- npm run build; wait; dotenv -c $NODE_ENV -- npm run watch & npm run devServer;",
+    "clear": "node task/clear.js",
+    "build": "node task/build.js",
+    "watch": "node task/build.js --watch",
+    "ejs": "node task/ejs.js",
+    "ejs:watch": "node task/ejs.js --watch",
+    "sass": "node task/sass.js",
+    "sass:watch": "node task/sass.js --watch",
+    "webp": "node task/webp.js",
+    "webp:watch": "node task/webp.js --watch",
+    "image": "node task/image.js",
+    "image:watch": "node task/image.js --watch",
+    "common": "node task/common.js",
+    "common:watch": "node task/common.js --watch",
+    "devServer": "node task/devServer.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "chokidar": "^3.5.3",
+    "deepmerge": "^4.3.1",
+    "dotenv-cli": "^7.2.1",
+    "ejs": "^3.1.9",
+    "glob": "^10.3.1",
+    "imagemin-keep-folder": "^5.3.2",
+    "imagemin-webp": "^8.0.0",
+    "jsonc-parser": "^3.2.0",
+    "minimatch": "^9.0.3",
+    "sass": "^1.63.6"
+  }
+}

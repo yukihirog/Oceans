@@ -1,0 +1,28 @@
+<header class="site-header" id="site-header">
+<div class="site-header__content">
+
+<%_
+  let logoTagName = 'div';
+  let logoHref = '/';
+  if (!path.replace(/^\//, '')) {
+    logoTagName = 'h1';
+    logoHref = '#top';
+  }
+_%>
+<<%= logoTagName %> class="site-header__title"><a href="<%= logoHref %>"><img src="/assets/img/logo.svg?<%= random %>" decoding="async" alt="<%= sitename %>"></a></<%= logoTagName %>>
+
+<a class="site-header__nav-toggle" href="#site-header__nav"><span class="site-header__nav-toggle__label">メニュー</span></a>
+
+<nav class="site-header__nav" id="site-header__nav">
+<ul class="site-header__menu">
+<li><a href="/menu/">メニュー</a></li>
+<li><a href="/menu/">メニュー</a></li>
+<li><a href="/menu/">メニュー</a></li>
+</ul>
+<ul class="site-header__features">
+<li><a class="button" href="___" target="_blank">お問い合わせはこちら</a></li>
+</ul>
+</nav>
+
+<%# /site-header__content %></div>
+</header>

@@ -1,0 +1,6 @@
+@use 'sass:math';
+@use './easing' as *;
+
+body {
+  transition: all .2s $easeInBack;
+}

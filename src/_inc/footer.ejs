@@ -1,0 +1,24 @@
+<footer class="site-footer">
+<div class="site-footer__content">
+
+<%_
+  let logoTagName = 'div';
+  let logoHref = '/';
+  if (!path.replace(/^\//, '')) {
+    logoTagName = 'h1';
+    logoHref = '#top';
+  }
+_%>
+<<%= logoTagName %> class="site-footer__title"><a href="<%= logoHref %>"><img src="/assets/img/logo.svg?<%= random %>" loading="lazy" alt="<%= sitename %>"></a></<%= logoTagName %>>
+
+<nav class="site-footer__nav">
+<ul class="site-footer__menu">
+<li><a href="___">リンク</a></li>
+<li><a href="___">リンク</a></li>
+</ul>
+</nav>
+
+<p class="site-footer__copyright"><small>© Copyright.</small></p>
+
+<%# /site-footer__content %></div>
+</footer>

@@ -1,0 +1,54 @@
+{
+  // モード
+  "mode": "production",
+  // パス
+  "path": {
+    // 開発ディレクトリ
+    "input": "src",
+    // 出力ディレクトリ
+    "output": "dist"
+  },
+  "task": {
+    "ejs": {
+      "glob": "/**/*.ejs",
+      "ignores": [
+        "**/_*",
+        "**/_*/**/*",
+        "**/vendor/**/*"
+      ],
+      "isSilent": true,
+      "data": "_inc/data.jsonc",
+      "views": [
+        "_inc/"
+      ]
+    },
+    "sass": {
+      "glob": "/**/*.{sass,scss}",
+      "ignores": [
+        "**/_*",
+        "**/_*/**/*",
+        "**/vendor/**/*"
+      ],
+      "isSilent": true,
+      "sourceMap": false,
+      "style": "compressed"
+    },
+    "image": {
+      "glob": "/**/*.{jpg,jpeg,png,gif,svg,webp}",
+      "isSilent": true
+    },
+    "common": {
+      "glob": ["/**/*"],
+      "ignores": [
+        "**/_*/**/*",
+        "**/.DS_Store",
+        "**/Thumbs.db",
+        "**/*.{ejs,svg,webp,jpg,jpeg,png,gif,sass,scss}"
+      ],
+      "isSilent": true
+    },
+    "devServer": {
+      "watch": true
+    }
+  }
+}

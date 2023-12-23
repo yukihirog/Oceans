@@ -1,0 +1,23 @@
+{
+  // モード
+  "mode": "development",
+  "task": {
+    "ejs": {
+      "isSilent": false
+    },
+    "sass": {
+      "sourceMap": true,
+      "style": "expanded",
+      "isSilent": false
+    },
+    "image": {
+      "isSilent": false
+    },
+    "webp": {
+      "isSilent": false
+    },
+    "common": {
+      "isSilent": false
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<%_
+const data = {
+  title: "タイトル",
+  ogtype: "website"
+};
+_%>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<%- include('_inc/head', data); -%>
+</head>
+<body>
+<%- include('_inc/header', data); -%>
+
+<main class="content">
+<header class="content-header">
+<h1 class="content-header__title"><%= data.title %></h1>
+</header>
+<div class="content-body">
+
+<p>Contents</p>
+
+<%# /content-body %></div>
+<%# /content %></main>
+
+<%- include('_inc/footer', data); -%>
+</body>
+</html>

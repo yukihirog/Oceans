@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<%_
+const titles = [sitename];
+if (title) {
+  titles.unshift(title);
+}
+const pagetitle = titles.join(' | ');
+_%>
+<title><%= pagetitle %></title>
+<meta name="description" content="<%= description %>">
+<meta name="viewport" content="width=device-width">
+<meta name="format-detection" content="telephone=no">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="<%= sitename %>">
+<meta property="og:type" content="<%= ogtype %>">
+<meta property="og:image" content="<%= url.replace(/\/$/, '') %>/assets/img/ogp.png?<%= random %>">
+<link rel="canonical" href="<%= url.replace(/\/$/, '') %>/<%= path.replace(/^\//, '') %>">
+<link rel="stylesheet" href="/assets/css/index.css?<%= random %>">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= gtmid %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<%= gtmid %>');
+</script>
+<script src="/assets/js/index.js?<%= random %>" type="module"></script>
