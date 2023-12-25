@@ -20,12 +20,16 @@ export default class TaskEjs extends TaskAbstract {
   // データファイルの場所
   get dataPath() {
     const dataFile = this.getConfig('data');
-    return dataFile ? path.resolve(this.inputBaseDir, dataFile) : '';
+    return dataFile ? path.resolve(this.inputBaseDir, dataFile.replace(/^\//, '')) : '';
   }
 
   // パーツ等の格納ディレクトリ
   get viewDirs() {
-    return [...this.getConfig('views').map(dir => path.resolve(this.inputBaseDir, dir))];
+    let viewDirs = this.getConfig('views');
+    if (typeof viewDirs === 'string') {
+      viewDirs = [viewDirs];
+    }
+    return viewDirs.map(dir => path.resolve(this.inputBaseDir, dir.replace(/^\//, '')));
   }
 
   /**
@@ -82,24 +86,27 @@ export default class TaskEjs extends TaskAbstract {
    * ビルド
    */
   async build() {
-    this.message(`Started ${this.taskName}:build`);
+    return new Promise(async (resolve, reject) => {
+      this.message(`Started ${this.taskName}:build`);
 
-    // globで対象ファイル取得
-    const promise = glob(this.inputBaseDir + this.getConfig('glob'), {
-      ignore: this.getConfig('ignores'),
-      nodir: true,
-      dot: true
+      // globで対象ファイル取得
+      const promise = glob(this.getInputGlobs(), {
+        ignore: this.getConfig('ignores'),
+        nodir: true,
+        dot: true
+      });
+  
+      // 非同期でファイルコピー
+      promise
+        .then(async (files) => {
+          const promises = Promise.allSettled(files.map(this.process.bind(this)));
+          promises.finally(() => {
+            this.message(`Finished ${this.taskName}:build`);
+            resolve();
+          });
+        })
+      ;
     });
-
-    // 非同期でファイルコピー
-    promise
-      .then(files => {
-        const promises = Promise.allSettled(files.map(this.process.bind(this)));
-        promises.finally(() => {
-          this.message(`Finished ${this.taskName}:build`);
-        });
-      })
-    ;
   };
 
   /**
@@ -109,10 +116,10 @@ export default class TaskEjs extends TaskAbstract {
     this.message(`${this.taskName}:watch`);
 
     // ページファイル
-    const pageFiles = [this.inputBaseDir + this.getConfig('glob')];
+    const pageFiles = this.getInputGlobs();
 
     // パーツやデータ
-    const partsFiles = [...(this.viewDirs.map(dir => dir + '/**/*.ejs')), this.dataPath];
+    const partsFiles = [...(this.viewDirs.map(dir => path.resolve(dir, '**/*.ejs'))), this.dataPath];
 
     // ページファイル判定
     const _isPage = (file) => {

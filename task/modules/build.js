@@ -1,51 +1,68 @@
 import TaskAbstract from './abstract.js';
-import TaskClear from './clear.js';
 
 export default class TaskBuild extends TaskAbstract {
   // タスク名
-  taskName = 'build';
-
-  // サブタスク
-  subTasks = [
-    'ejs',
-    'sass',
-//      'webp',
-    'image',
-    'common'
-  ];
+  static taskName = 'build';
 
   /**
    * 設定
    */
   initConfig(config) {
-    // 入力対象ディレクトリの末尾を落としておく
-    this.inputBaseDir = config.path.input.replace(/\/$/, '');
+    super.initConfig(config);
 
-    // 出力先
-    this.outputBaseDir = config.path.output;
-
-    // コンフィグファイル
-    this.config = config;
+    // 設定全体
+    this.configAll = config;
   }
 
-  build() {
-    this.message(`Started ${this.taskName}`);
+  /**
+   * タスクグループの実行
+   */
+  doTaskGroup(i = 0, method = 'build') {
+    return new Promise(async (resolveAll, rejectAll) => {
+      const subTasks = this.getConfig('subTasks');
 
-    (new TaskClear(this.config)).build();
+      let taskGroup = subTasks[i];
+      if (!taskGroup) {
+        resolveAll();
+        return;
+      }
+  
+      if (typeof taskGroup === 'string') {
+        taskGroup = [taskGroup];
+      }
+  
+      // 個別タスクを読み込んで実行し、グループが終了するのを待つ
+      const promises = taskGroup.map((taskName) => {
+        return new Promise(async (resolve, reject) => {
+          import(`./${taskName}.js`)
+            .then(task => {
+              (new task.default(this.configAll))[method]().finally(resolve);
+            })
+            .catch(reject)
+          ;
+        });
+      })
 
-    this.subTasks.forEach(taskName => {
-      import(`./${taskName}.js`).then(task => {
-        (new task.default(this.config)).build();
+      Promise.allSettled(promises).then(() => {
+        this.doTaskGroup(i + 1, method);
       });
     });
+  };
 
-    this.message(`Finished ${this.taskName}`);
+  async build() {
+    return new Promise(async (resolveAll, reject) => {
+      this.message(`Started ${this.taskName}`);
+      this.doTaskGroup(0, 'build').then(() => {
+        this.message(`Finished ${this.taskName}`);
+        resolveAll();
+      });
+    });
   }
 
-  watch() {
-    this.subTasks.forEach(taskName => {
-      import(`./${taskName}.js`).then(task => {
-        (new task.default(this.config)).watch();
+  async watch() {
+    return new Promise(async (resolveAll, reject) => {
+      this.doTaskGroup(0, 'watch').then(() => {
+        resolveAll();
       });
     });
   }

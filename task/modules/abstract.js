@@ -47,6 +47,17 @@ export default class TaskAbstract {
   }
 
   /**
+   * 設定取得
+   */
+  getInputGlobs() {
+    let globs = this.getConfig('glob');
+    if (typeof globs === 'string') {
+      globs = [globs];
+    }
+    return globs.map(glob => path.resolve(this.inputBaseDir, glob.replace(/^\//, '')));
+  }
+
+  /**
    * 色付きでメッセージ出力
    */
   message(string, after) {
@@ -153,8 +164,11 @@ export default class TaskAbstract {
    * ビルド
    */
   async build() {
-    this.message(`Started ${this.taskName}:build`);
-    this.message(`Finished ${this.taskName}:build`);
+    return new Promise((resolve, reject) => {
+      this.message(`Started ${this.taskName}:build`);
+      this.message(`Finished ${this.taskName}:build`);
+      resolve();
+    });
   };
 
   /**

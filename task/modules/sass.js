@@ -111,24 +111,27 @@ export default class TaskSass extends TaskAbstract {
    * ビルド
    */
   async build() {
-    this.message(`Started ${this.taskName}:build`);
+    return new Promise(async (resolve, reject) => {
+      this.message(`Started ${this.taskName}:build`);
 
-    // globで対象ファイル取得
-    const promise = glob(this.inputBaseDir + this.getConfig('glob'), {
-      ignore: this.getConfig('ignores'),
-      nodir: true,
-      dot: true
+      // globで対象ファイル取得
+      const promise = glob(this.getInputGlobs(), {
+        ignore: this.getConfig('ignores'),
+        nodir: true,
+        dot: true
+      });
+
+      // 非同期でファイルコピー
+      promise
+        .then(async (files) => {
+          const promises = Promise.allSettled(files.map(this.process.bind(this)));
+          promises.finally(() => {
+            this.message(`Finished ${this.taskName}:build`);
+            resolve();
+          });
+        })
+      ;
     });
-
-    // 非同期でファイルコピー
-    promise
-      .then(files => {
-        const promises = Promise.allSettled(files.map(this.process.bind(this)));
-        promises.finally(() => {
-          this.message(`Finished ${this.taskName}:build`);
-        });
-      })
-    ;
   };
 
   /**
@@ -138,7 +141,7 @@ export default class TaskSass extends TaskAbstract {
     this.message(`${this.taskName}:watch`);
 
     chokidar
-      .watch(this.inputBaseDir + this.getConfig('glob'), {
+      .watch(this.getInputGlobs(), {
         ignored: this.getConfig('ignores'),
         ignoreInitial: true
       })

@@ -35,7 +35,7 @@ export default class TaskImage extends TaskAbstract {
   async build() {
     this.message(`Started ${this.taskName}:build`);
 
-    const src = [this.inputBaseDir + this.getConfig('glob')];
+    const src = this.getInputGlobs();
     const ignores = (this.getConfig('ignores') || []).map(str => '!' + str);
     return imagemin(
       src.concat(ignores),
@@ -44,6 +44,9 @@ export default class TaskImage extends TaskAbstract {
         use: this.constructor.plugins
       }
     ).then(files => {
+      files.forEach(file => {
+        this.message(`${this.taskName}:process `, file.path);
+      });
       this.message(`Finished ${this.taskName}:build`);
     });
   };
@@ -55,7 +58,7 @@ export default class TaskImage extends TaskAbstract {
     this.message(`${this.taskName}:watch`);
 
     chokidar
-      .watch(this.inputBaseDir + this.getConfig('glob'), {
+      .watch(this.getInputGlobs(), {
         ignored: this.getConfig('ignores'),
         ignoreInitial: true
       })

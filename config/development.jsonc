@@ -6,9 +6,9 @@
       "isSilent": false
     },
     "sass": {
+      "isSilent": false,
       "sourceMap": true,
-      "style": "expanded",
-      "isSilent": false
+      "style": "expanded"
     },
     "image": {
       "isSilent": false
